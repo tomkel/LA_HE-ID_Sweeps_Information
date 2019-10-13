@@ -5,6 +5,7 @@ dependencies:
   moment: 2.24.0
   moment-timezone: 0.5.26
   pdfjs-dist: 2.2.228_webpack@4.41.1
+  ramda: 0.26.1
 devDependencies:
   '@babel/core': 7.6.4
   '@babel/preset-env': 7.6.3_@babel+core@7.6.4
@@ -3182,6 +3183,10 @@ packages:
       node: '>=0.4.x'
     resolution:
       integrity: sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
+  /ramda/0.26.1:
+    dev: false
+    resolution:
+      integrity: sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
   /randombytes/2.1.0:
     dependencies:
       safe-buffer: 5.2.0
@@ -4150,5 +4155,6 @@ specifiers:
   moment: ^2.24.0
   moment-timezone: ^0.5.26
   pdfjs-dist: ^2.2.228
+  ramda: ^0.26.1
   webpack: ^4.41.0
   webpack-cli: ^3.3.9

@@ -43,22 +43,21 @@ const transformTextItems = ({ pageHeight, numPages }) => (textItems, pageI) => t
 
 const isSameRow = (y) => (textItem) => y === textItem.y
 const sortByX = (row) => row.sort((a, b) => (a.x - b.x))
+const sortByY = (row) => row.sort((a, b) => (a.y - b.y))
+// If there are duplicate headers on a row, split the row in two
 const splitRowByGrid = (row) => {
-  const splitI = row.reduce((last, curr, i) => {
-    if (typeof curr === 'number') return curr
+  const firstHeader = peek(row).str
+  const splitI = R.findLastIndex(R.propEq('str', firstHeader), row)
 
-    if (last.x + last.width === curr.x) return curr
+  if (splitI === 0) return [row]
 
-    return i
-  })
   return [row.slice(0, splitI), row.slice(splitI)]
 }
 
-const getHeaders = (textItemArr) => textItemArr
+const getGridHeaders = (textItemArr) => textItemArr
   .filter(({ str }) => str === 'Address')
   .map(({ y }) => textItemArr.filter(isSameRow(y)))
   .map(sortByX)
-  .map(tap(console.log))
   .flatMap(splitRowByGrid)
 
 let pageHeight
@@ -73,29 +72,12 @@ pdf
   .then((textItemArrArr) => textItemArrArr.map(transformTextItems({ pageHeight, numPages: textItemArrArr.length })).flat())
 //  .then(tap(console.log))
 
-// .then(tap((arr) => arr.map((i) => console.log(i.length))))
 // .then(tap((textItemArr) => fs.writeFileSync('care-10-11.json', JSON.stringify(textItemArr))))
 
-// const currentX = item.transform[4]
-// const currentY = item.transform[5]
+  .then(sortByY)
   .then((textItemArr) => {
-    const headers = getHeaders(textItemArr)
-//    console.log(headers)
+    const headers = getGridHeaders(textItemArr)
+    const rows = R.groupWith((a, b) => Math.abs(a.y - b.y) < 5.0, textItemArr)
+    console.log(rows.length)
   })
-  // str.trim()
   .catch((e) => console.error('ERROR!!', e))
-
-/*
-const workbook = fetch(url)
-  .then((res) => {
-    if (!res.ok) throw new Error('fetch failed')
-    return res.arrayBuffer()
-  })
-  .then((ab) => {
-    const data = new Uint8Array(ab)
-    return XLSX.read(data, { type: 'array' })
-  })
-  .then(console.log)
-  .catch(console.error)
-
-  */
