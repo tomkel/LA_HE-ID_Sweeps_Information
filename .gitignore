@@ -3,4 +3,5 @@ elm-stuff/*
 node_modules
 public/elm.js
 public/main.js
+public/pdf.worker.js
 .env

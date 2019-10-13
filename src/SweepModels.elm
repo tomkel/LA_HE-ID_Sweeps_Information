@@ -84,6 +84,9 @@ type Division
   | Wilshire
   | WestLosAngeles
   | NorthHollywood
+  | Hollywood
+  | Pacific
+  | Mission
   | OtherDivision String
 
 divisionToStr division =
@@ -101,6 +104,9 @@ divisionToStr division =
   Wilshire -> "Wilshire"
   WestLosAngeles -> "West Los Angeles"
   NorthHollywood -> "North Hollywood"
+  Hollywood -> "Hollywood"
+  Pacific -> "Pacific"
+  Mission -> "Mission"
   OtherDivision name -> name
 
 divisionDecoder: Decoder Division
@@ -137,6 +143,12 @@ divisionDecoder =
       Decode.succeed WestLosAngeles
     "north hollywood" ->
       Decode.succeed NorthHollywood
+    "hollywood" ->
+      Decode.succeed Hollywood
+    "pacific" ->
+      Decode.succeed Pacific
+    "mission" ->
+      Decode.succeed Mission
     somethingElse ->
       Decode.succeed <| OtherDivision str
   )
@@ -146,6 +158,7 @@ type Status
   | MissingLAHSASignature
   | Authorized
   | MissingAllSignatures
+  | PendingBPWSignature
   | OtherStatus String
 
 statusToStr status =
@@ -158,6 +171,8 @@ statusToStr status =
     "Missing All 3 Signatures"
   Authorized ->
     "Authorized"
+  PendingBPWSignature ->
+    "Pending BPW Signature"
   OtherStatus str -> str
 
 statusDecoder: Decoder Status
@@ -176,6 +191,8 @@ statusDecoder =
       Decode.succeed Authorized
     "missing all 3 signatures" ->
       Decode.succeed MissingAllSignatures
+    "pending bpw signature" ->
+      Decode.succeed PendingBPWSignature
     s ->
       Decode.succeed <| OtherStatus s
   )

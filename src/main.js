@@ -1,6 +1,6 @@
-// import './parseCare.js'
 import L from 'leaflet'
 import { BingProvider } from 'leaflet-geosearch'
+import './parseCare'
 import { Elm } from './Main.elm'
 
 const log = (...args) => {

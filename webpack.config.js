@@ -2,10 +2,14 @@ const path = require('path')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    main: './src/main.js',
+    'pdf.worker': 'pdfjs-dist/build/pdf.worker.entry',
+  },
   output: {
-    filename: 'main.js',
     path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
+    filename: '[name].js',
   },
   module: {
     rules: [

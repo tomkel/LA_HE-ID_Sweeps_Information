@@ -9,15 +9,12 @@
     "dev": "pnpm run bundleJS -- -d && node server.js"
   },
   "dependencies": {
-    "dotenv-webpack": "^1.7.0",
-    "elm": "0.19.0-no-deps",
     "express": "^4.17.1",
     "leaflet": "^1.5.1",
     "leaflet-geosearch": "^2.7.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
-    "pdfjs-dist": "^2.2.228",
-    "xlsx": "^0.15.1"
+    "pdfjs-dist": "^2.2.228"
   },
   "engines": {
     "node": ">=10"
@@ -35,6 +32,8 @@
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "babel-loader": "^8.0.6",
+    "dotenv-webpack": "^1.7.0",
+    "elm": "0.19.0-no-deps",
     "elm-webpack-loader": "^6.0.0",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9"
